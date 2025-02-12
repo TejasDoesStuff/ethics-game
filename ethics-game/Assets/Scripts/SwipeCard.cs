@@ -8,7 +8,7 @@ public class SwipeCard : MonoBehaviour
     private Vector2 mousePos;
     private bool isDragging = false;
     public float threshold = 2f;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 10f;
 
     [Header("Fade Out")]
     public float fadeSpeed = 1f;
@@ -60,7 +60,7 @@ public class SwipeCard : MonoBehaviour
 
     private IEnumerator SwipeAndFadeOut(string direction)
     {
-        float targetX = direction == "right" ? 10f : -10f;
+        float targetX = direction == "right" ? 20f : -20f;
 
         // move card
         while (Mathf.Abs(transform.position.x - targetX) > 0.1f)

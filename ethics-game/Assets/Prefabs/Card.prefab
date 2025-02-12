@@ -176,4 +176,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 2
-  moveSpeed: 5
+  moveSpeed: 10
+  fadeSpeed: 3
