@@ -26,9 +26,5 @@ public class CardProperties : MonoBehaviour
         {
             textBox.text = "This card is " + newText;
         }
-        else
-        {
-            Debug.LogWarning("TextMeshProUGUI not found on card!");
-        }
     }
 }
