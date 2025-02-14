@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SwipeCard : MonoBehaviour
 {
+
     [Header("Dragging")]
     private Vector2 startPos;
     private Vector2 mousePos;
@@ -19,10 +20,14 @@ public class SwipeCard : MonoBehaviour
     public delegate void SwipeAction(string direction);
     public static event SwipeAction OnSwipe;
 
+    private GameObject canvas;
+    
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
+        canvas = GameObject.FindWithTag("UI");
     }
 
     void Update()
@@ -80,6 +85,32 @@ public class SwipeCard : MonoBehaviour
             alpha -= Time.deltaTime * fadeSpeed;
             spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, Mathf.Clamp01(alpha));
             yield return null;
+        }
+
+        CardProperties cardScript = GetComponent<CardProperties>();
+        UpdateScores updateScript = canvas.GetComponent<UpdateScores>();
+        if (cardScript != null)
+        {
+            if (cardScript.cardValue == 1)
+            {
+                updateScript.updateText(1, direction);
+                Debug.Log("1");
+            }
+            else if (cardScript.cardValue == 2)
+            {
+                updateScript.updateText(2, direction);
+                Debug.Log("2");
+            }
+            else if (cardScript.cardValue == 3)
+            {
+                updateScript.updateText(3, direction);
+                Debug.Log("3");
+            }
+            else if (cardScript.cardValue == 4)
+            {
+                updateScript.updateText(4, direction);
+                Debug.Log("4");
+            }
         }
 
         Destroy(gameObject);
