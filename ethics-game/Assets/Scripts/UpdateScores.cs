@@ -16,6 +16,20 @@ public class UpdateScores : MonoBehaviour
         textItems = GetComponentsInChildren<TMP_Text>();
     }
 
+    // New method to update all scores at once from an array
+    public void updateMultiple(int[] changes)
+    {
+        // Assumes changes.Length == 4
+        score1 += changes[0];
+        score2 += changes[1];
+        score3 += changes[2];
+        score4 += changes[3];
+        textItems[0].text = "Item 1: " + score1;
+        textItems[1].text = "Item 2: " + score2;
+        textItems[2].text = "Item 3: " + score3;
+        textItems[3].text = "Item 4: " + score4;
+    }
+
     public void updateText(int num, string dir)
     {
         int change = (dir == "right") ? 1 : (dir == "left") ? -1 : 0;

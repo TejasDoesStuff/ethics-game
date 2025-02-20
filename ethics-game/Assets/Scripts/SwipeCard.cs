@@ -91,26 +91,9 @@ public class SwipeCard : MonoBehaviour
         UpdateScores updateScript = canvas.GetComponent<UpdateScores>();
         if (cardScript != null)
         {
-            if (cardScript.cardValue == 1)
-            {
-                updateScript.updateText(1, direction);
-                Debug.Log("1");
-            }
-            else if (cardScript.cardValue == 2)
-            {
-                updateScript.updateText(2, direction);
-                Debug.Log("2");
-            }
-            else if (cardScript.cardValue == 3)
-            {
-                updateScript.updateText(3, direction);
-                Debug.Log("3");
-            }
-            else if (cardScript.cardValue == 4)
-            {
-                updateScript.updateText(4, direction);
-                Debug.Log("4");
-            }
+            int[] changes = direction == "right" ? cardScript.rightScoreChanges : cardScript.leftScoreChanges;
+            updateScript.updateMultiple(changes);
+            Debug.Log($"Swiped {direction} with changes: {string.Join(", ", changes)}");
         }
 
         Destroy(gameObject);
