@@ -754,9 +754,23 @@ MonoBehaviour:
   cardPrefab: {fileID: 2101680844953455520, guid: 6e9d9e775b2d5a440ad5c03e6dcf6355, type: 3}
   spawnPoint: {fileID: 1099818772}
   cardScenarios:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 80e1c7ce904bc574f858e53cdd8a4e22, type: 2}
-  - {fileID: 11400000, guid: 1a2e060d2a5917b42bd9159d630085e8, type: 2}
+  - {fileID: 11400000, guid: b03960fbaf6063b42a86031ab7c64816, type: 2}
+  - {fileID: 11400000, guid: d36d7025f8e04b64690e1b24f65f433a, type: 2}
+  - {fileID: 11400000, guid: 74cc9a4914809ba469064a5fdd4ff18a, type: 2}
+  - {fileID: 11400000, guid: 73f2898411216314fbeb8a8e93df3cd2, type: 2}
+  - {fileID: 11400000, guid: 40fe39e314655154582e8679d7910553, type: 2}
+  - {fileID: 11400000, guid: d763ecfa28941c044a7a7ae95c412729, type: 2}
+  - {fileID: 11400000, guid: 3af4da638faf9a54d800e9e798c86e96, type: 2}
+  - {fileID: 11400000, guid: 6f8342e072a5f9e4fa71a4746a012b28, type: 2}
+  - {fileID: 11400000, guid: ba635c134f646c54c90de3d37d881022, type: 2}
+  - {fileID: 11400000, guid: dd13c4477a035fd4b941723fa3a88756, type: 2}
+  - {fileID: 11400000, guid: a99e03a05c1dd7944b8491be18ee1d38, type: 2}
+  - {fileID: 11400000, guid: 501a9fd85519f9e4d9fba3540ff0b719, type: 2}
+  - {fileID: 11400000, guid: c3babfd6d3be17a42be42ee3e8079cff, type: 2}
+  - {fileID: 11400000, guid: 2f592c0f064379c44af8bb32fbf5d7be, type: 2}
+  - {fileID: 11400000, guid: ea6e4a8fa0babd74da221ebf6870a3b0, type: 2}
+  - {fileID: 11400000, guid: a1ce37167f59e954ea9f14c26402f669, type: 2}
+  - {fileID: 11400000, guid: 8ef7e7d9d750221498d9c099016b1188, type: 2}
 --- !u!4 &1229386267
 Transform:
   m_ObjectHideFlags: 0
