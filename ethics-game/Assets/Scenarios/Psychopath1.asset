@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62171d213c9b1464486bf25992886962, type: 3}
+  m_Name: Psychopath1
+  m_EditorClassIdentifier: 
+  scenarioText: 'You have an election coming up and can sabotage your rival by planting
+    evidence. '
+  leftScoreChanges: 000000001400000000000000ecffffff
+  rightScoreChanges: 00000000ecffffff0000000014000000

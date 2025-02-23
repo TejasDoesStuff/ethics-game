@@ -14,11 +14,11 @@ public class CardProperties : MonoBehaviour
     {
         textBox = GetComponentInChildren<TextMeshProUGUI>();
         // Optionally display the score arrays on the card
-        cardText = "Left: [" + string.Join(", ", leftScoreChanges) + "] Right: [" + string.Join(", ", rightScoreChanges) + "]";
+        /*cardText = "Left: [" + string.Join(", ", leftScoreChanges) + "] Right: [" + string.Join(", ", rightScoreChanges) + "]";*/
         SetText(cardText);
     }
 
-    public void SetRandomValue()
+    /*public void SetRandomValue()
     {
         // Create arrays for 4 score values each
         leftScoreChanges = new int[4];
@@ -30,6 +30,14 @@ public class CardProperties : MonoBehaviour
             // For right swipes, random positive values (or zero)
             rightScoreChanges[i] = Random.Range(0, 11);
         }
+    }*/
+
+    public void SetCardScenario(CardScenario scenario)
+    {
+        cardText = scenario.scenarioText;
+        leftScoreChanges = scenario.leftScoreChanges;
+        rightScoreChanges = scenario.rightScoreChanges;
+        SetText(cardText);
     }
 
     public void SetText(string newText)

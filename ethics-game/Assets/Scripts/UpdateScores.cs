@@ -1,58 +1,64 @@
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class UpdateScores : MonoBehaviour
 {
     private TMP_Text[] textItems;
 
-    int score1 = 0;
-    int score2 = 0;
-    int score3 = 0;
-    int score4 = 0;
+    public int score1 = 50;
+    public int score2 = 50;
+    public int score3 = 50;
+    public int score4 = 50;
+
+    public int maxThreshold = 80;
 
     void Awake()
     {
         textItems = GetComponentsInChildren<TMP_Text>();
     }
 
-    // New method to update all scores at once from an array
     public void updateMultiple(int[] changes)
     {
-        // Assumes changes.Length == 4
         score1 += changes[0];
         score2 += changes[1];
         score3 += changes[2];
         score4 += changes[3];
-        textItems[0].text = "Item 1: " + score1;
-        textItems[1].text = "Item 2: " + score2;
-        textItems[2].text = "Item 3: " + score3;
-        textItems[3].text = "Item 4: " + score4;
+
+        score1 = Mathf.Clamp(score1, 0, 100);
+        score2 = Mathf.Clamp(score2, 0, 100);
+        score3 = Mathf.Clamp(score3, 0, 100);
+        score4 = Mathf.Clamp(score4, 0, 100);
+
+        bool anyAboveThreshold = score1 >= maxThreshold || score2 >= maxThreshold || score3 >= maxThreshold || score4 >= maxThreshold;
+
+        textItems[0].text = anyAboveThreshold && score1 < maxThreshold ? "" : "Justice: " + score1;
+        textItems[1].text = anyAboveThreshold && score2 < maxThreshold ? "" : "Virtue: " + score2;
+        textItems[2].text = anyAboveThreshold && score3 < maxThreshold ? "" : "Happiness: " + score3;
+        textItems[3].text = anyAboveThreshold && score4 < maxThreshold ? "" : "Control: " + score4;
+
+        CheckGameOver();
     }
 
-    public void updateText(int num, string dir)
+    public bool ShouldHideValues()
     {
-        int change = (dir == "right") ? 1 : (dir == "left") ? -1 : 0;
+        return score1 >= maxThreshold || score2 >= maxThreshold || score3 >= maxThreshold || score4 >= maxThreshold;
+    }
 
-        if (num == 1)
+    private void CheckGameOver()
+    {
+        int[] scores = { score1, score2, score3, score4 };
+        string[] scoreNames = { "Justice", "Virtue", "Happiness", "Control" };
+
+        for (int i = 0; i < scores.Length; i++)
         {
-            score1 += change;
-            textItems[0].text = "Item 1: " + score1;
-        }
-        else if (num == 2)
-        {
-            score2 += change;
-            textItems[1].text = "Item 2: " + score2;
-        }
-        else if (num == 3)
-        {
-            score3 += change;
-            textItems[2].text = "Item 3: " + score3;
-        }
-        else if (num == 4)
-        {
-            score4 += change;
-            textItems[3].text = "Item 4: " + score4;
+            if (scores[i] == 100)
+            {
+                Debug.Log($"Game Over: {scoreNames[i]} reached 100!");
+            }
+            else if (scores[i] == 0)
+            {
+                Debug.Log($"Game Over: {scoreNames[i]} reached 0!");
+            }
         }
     }
 }

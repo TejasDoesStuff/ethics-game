@@ -3,7 +3,6 @@ using System.Collections;
 
 public class SwipeCard : MonoBehaviour
 {
-
     [Header("Dragging")]
     private Vector2 startPos;
     private Vector2 mousePos;
@@ -21,13 +20,16 @@ public class SwipeCard : MonoBehaviour
     public static event SwipeAction OnSwipe;
 
     private GameObject canvas;
-    
+    private CardProperties cardScript;
+    private UpdateScores updateScript;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
         canvas = GameObject.FindWithTag("UI");
+        cardScript = GetComponent<CardProperties>();
+        updateScript = canvas.GetComponent<UpdateScores>();
     }
 
     void Update()
@@ -36,6 +38,20 @@ public class SwipeCard : MonoBehaviour
         {
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(mousePos.x, startPos.y, transform.position.z);
+
+            float swipeDistance = transform.position.x - startPos.x;
+            if (swipeDistance > 0.5f)
+            {
+                ShowSwipeValues("right");
+            }
+            else if (swipeDistance < -0.5f)
+            {
+                ShowSwipeValues("left");
+            }
+            else
+            {
+                ResetCardText();
+            }
         }
     }
 
@@ -50,7 +66,6 @@ public class SwipeCard : MonoBehaviour
         if (!isDragging) return;
         isDragging = false;
 
-        // if card has moved passed the 'threshold' and the mouse is let go the card moves
         float swipeDistance = transform.position.x - startPos.x;
         if (Mathf.Abs(swipeDistance) > threshold)
         {
@@ -60,6 +75,7 @@ public class SwipeCard : MonoBehaviour
         else
         {
             transform.position = startPos;
+            ResetCardText();
         }
     }
 
@@ -67,7 +83,6 @@ public class SwipeCard : MonoBehaviour
     {
         float targetX = direction == "right" ? 20f : -20f;
 
-        // move card
         while (Mathf.Abs(transform.position.x - targetX) > 0.1f)
         {
             transform.position = new Vector3(
@@ -78,7 +93,6 @@ public class SwipeCard : MonoBehaviour
             yield return null;
         }
 
-        // fade out
         float alpha = originalColor.a;
         while (alpha > 0)
         {
@@ -87,8 +101,6 @@ public class SwipeCard : MonoBehaviour
             yield return null;
         }
 
-        CardProperties cardScript = GetComponent<CardProperties>();
-        UpdateScores updateScript = canvas.GetComponent<UpdateScores>();
         if (cardScript != null)
         {
             int[] changes = direction == "right" ? cardScript.rightScoreChanges : cardScript.leftScoreChanges;
@@ -97,7 +109,24 @@ public class SwipeCard : MonoBehaviour
         }
 
         Destroy(gameObject);
-
         OnSwipe?.Invoke(direction);
+    }
+
+    private void ShowSwipeValues(string direction)
+    {
+        if (cardScript != null && !updateScript.ShouldHideValues())
+        {
+            int[] values = direction == "right" ? cardScript.rightScoreChanges : cardScript.leftScoreChanges;
+            string newText = $"{cardScript.cardText}\n{direction.ToUpper()} Changes: [{string.Join(", ", values)}]";
+            cardScript.SetText(newText);
+        }
+    }
+
+    private void ResetCardText()
+    {
+        if (cardScript != null)
+        {
+            cardScript.SetText(cardScript.cardText);
+        }
     }
 }
