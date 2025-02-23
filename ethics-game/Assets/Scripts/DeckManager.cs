@@ -10,7 +10,15 @@ public class DeckManager : MonoBehaviour
     private void Start()
     {
         SwipeCard.OnSwipe += HandleCardSwipe;
-        SpawnNewCard();
+        LoadScenarios(); // Add this line to load scenarios from the folder
+        if (cardScenarios.Count > 0)
+        {
+            SpawnNewCard();
+        }
+        else
+        {
+            Debug.LogError("No card scenarios available to spawn.");
+        }
     }
 
     private void HandleCardSwipe(string direction)
@@ -19,8 +27,18 @@ public class DeckManager : MonoBehaviour
         SpawnNewCard();
     }
 
+    private void LoadScenarios() // Add this method to load scenarios from the folder
+    {
+        cardScenarios = new List<CardScenario>(Resources.LoadAll<CardScenario>("Scenarios"));
+    }
+
     private void SpawnNewCard()
     {
+        if (cardScenarios.Count == 0)
+        {
+            Debug.LogError("No card scenarios available to spawn.");
+            return;
+        }
         GameObject newCard = Instantiate(cardPrefab, spawnPoint.position, Quaternion.identity);
         newCard.transform.SetParent(transform);
         CardProperties cardScript = newCard.GetComponent<CardProperties>();
@@ -32,13 +50,6 @@ public class DeckManager : MonoBehaviour
         // Assign random color
         Color randomColor = new Color(Random.value, Random.value, Random.value);
         newCard.GetComponent<SpriteRenderer>().color = randomColor;
-
-        // Assign random value
-        /*        CardProperties cardScript = newCard.GetComponent<CardProperties>();
-                if (cardScript != null)
-                {
-                    cardScript.SetRandomValue();
-                }*/
 
         if (cardScript != null)
         {

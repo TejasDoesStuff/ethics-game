@@ -6,6 +6,8 @@ public class CardProperties : MonoBehaviour
     // Remove single cardValue and add arrays for left and right swipe changes
     public int[] leftScoreChanges;
     public int[] rightScoreChanges;
+    public string leftDecisionName; // Add this line
+    public string rightDecisionName; // Add this line
 
     private TextMeshProUGUI textBox;
     public string cardText;
@@ -14,7 +16,7 @@ public class CardProperties : MonoBehaviour
     {
         textBox = GetComponentInChildren<TextMeshProUGUI>();
         // Optionally display the score arrays on the card
-        /*cardText = "Left: [" + string.Join(", ", leftScoreChanges) + "] Right: [" + string.Join(", ", rightScoreChanges) + "]";*/
+        /*cardText = "Left: [" + string.Join(", ", leftScoreChanges) + "] Right: [" + string.join(", ", rightScoreChanges) + "]";*/
         SetText(cardText);
     }
 
@@ -37,6 +39,8 @@ public class CardProperties : MonoBehaviour
         cardText = scenario.scenarioText;
         leftScoreChanges = scenario.leftScoreChanges;
         rightScoreChanges = scenario.rightScoreChanges;
+        leftDecisionName = scenario.leftDecisionName; // Add this line
+        rightDecisionName = scenario.rightDecisionName; // Add this line
         SetText(cardText);
     }
 
@@ -44,7 +48,7 @@ public class CardProperties : MonoBehaviour
     {
         if (textBox != null)
         {
-            textBox.text = "This card has:\n" + newText;
+            textBox.text = newText;
         }
     }
 }

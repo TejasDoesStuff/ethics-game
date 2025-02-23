@@ -30,6 +30,16 @@ public class SwipeCard : MonoBehaviour
         canvas = GameObject.FindWithTag("UI");
         cardScript = GetComponent<CardProperties>();
         updateScript = canvas.GetComponent<UpdateScores>();
+
+        if (cardScript == null)
+        {
+            Debug.LogError("CardProperties component not found on the card.");
+        }
+
+        if (updateScript == null)
+        {
+            Debug.LogError("UpdateScores component not found on the canvas.");
+        }
     }
 
     void Update()
@@ -117,7 +127,15 @@ public class SwipeCard : MonoBehaviour
         if (cardScript != null && !updateScript.ShouldHideValues())
         {
             int[] values = direction == "right" ? cardScript.rightScoreChanges : cardScript.leftScoreChanges;
-            string newText = $"{cardScript.cardText}\n{direction.ToUpper()} Changes: [{string.Join(", ", values)}]";
+            string decisionName = direction == "right" ? cardScript.rightDecisionName : cardScript.leftDecisionName;
+            string cardText = cardScript.cardText;
+
+            // Provide placeholders if any variable is null
+            values = values ?? new int[4];
+            decisionName = direction == "right" ? (decisionName ?? "disagree") : (decisionName ?? "agree");
+            cardText = cardText ?? "Card Text";
+
+            string newText = $"{cardText}\n{decisionName.ToUpper()} Changes: [{string.Join(", ", values)}]";
             cardScript.SetText(newText);
         }
     }
