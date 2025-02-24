@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62171d213c9b1464486bf25992886962, type: 3}
+  m_Name: Virtue7
+  m_EditorClassIdentifier: 
+  scenarioText: 'A group of workers at your factory are being forced to work overtime
+    without extra pay. If you intervene, you will anger the factory owner and risk
+    losing their support. '
+  leftScoreChanges: 000000000a00000005000000f6ffffff
+  rightScoreChanges: 0a00000000000000f6ffffff0a000000
+  leftDecisionName: Stand up for the workers.
+  rightDecisionName: Ignore the situation.
+  cardType: Virtue

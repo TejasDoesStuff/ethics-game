@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62171d213c9b1464486bf25992886962, type: 3}
+  m_Name: Virtue6
+  m_EditorClassIdentifier: 
+  scenarioText: 'A close friend of yours has been caught taking a small amount of
+    money from a government fund to help her struggling family. She regrets it and
+    swears never to do it again. '
+  leftScoreChanges: f6ffffff0a0000000500000000000000
+  rightScoreChanges: 0a00000000000000f6ffffff0a000000
+  leftDecisionName: Forgive her.
+  rightDecisionName: Report her.
+  cardType: Virtue
