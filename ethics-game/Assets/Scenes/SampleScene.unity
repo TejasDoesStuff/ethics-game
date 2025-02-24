@@ -1314,8 +1314,8 @@ Canvas:
   m_GameObject: {fileID: 522548538}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -3321,7 +3321,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Judge - Keeping things fair
+  m_text: The Judge - Keeping things just
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4356,7 +4356,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 135
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.972549}
   m_FlipX: 0
@@ -4449,7 +4449,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 162
   m_TargetDisplay: 0
 --- !u!114 &4721126820151874175
 MonoBehaviour:
@@ -4631,7 +4631,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'choose a new assistant:'
+  m_text: 'choose a new assistant
+
+    (you can''t choose it again till you choose
+    the rest!)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4658,8 +4661,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.2
-  m_fontSizeBase: 48.2
+  m_fontSize: 34.8
+  m_fontSizeBase: 34.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4815,8 +4818,27 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7453901248996471800, guid: 382e5ca285deb424688143c4b41ec6ec, type: 3}
+      propertyPath: m_text
+      value: 'Months: 0
+
+        Days: 22
+
+
+        Due to a lack of control in the
+        government, a terrorist organization takes over Ethika, leaving your head
+        on a pole for everyone to see.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453901248996471800, guid: 382e5ca285deb424688143c4b41ec6ec, type: 3}
+      propertyPath: m_fontSize
+      value: 27.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453901248996471800, guid: 382e5ca285deb424688143c4b41ec6ec, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 27.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453901248996471800, guid: 382e5ca285deb424688143c4b41ec6ec, type: 3}
       propertyPath: m_TextWrappingMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8766921594515291840, guid: 382e5ca285deb424688143c4b41ec6ec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4857,6 +4879,22 @@ PrefabInstance:
     - target: {fileID: 8766921594515291840, guid: 382e5ca285deb424688143c4b41ec6ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168334809329677570, guid: 382e5ca285deb424688143c4b41ec6ec, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 947.469
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168334809329677570, guid: 382e5ca285deb424688143c4b41ec6ec, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 32.6021
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168334809329677570, guid: 382e5ca285deb424688143c4b41ec6ec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168334809329677570, guid: 382e5ca285deb424688143c4b41ec6ec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -128.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
