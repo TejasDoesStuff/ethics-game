@@ -10,7 +10,7 @@ public class DeckManager : MonoBehaviour
     private void Start()
     {
         SwipeCard.OnSwipe += HandleCardSwipe;
-        LoadScenarios(); // Add this line to load scenarios from the folder
+        LoadScenarios();
         if (cardScenarios.Count > 0)
         {
             SpawnNewCard();
@@ -27,12 +27,12 @@ public class DeckManager : MonoBehaviour
         SpawnNewCard();
     }
 
-    private void LoadScenarios() // Add this method to load scenarios from the folder
+    private void LoadScenarios()
     {
         cardScenarios = new List<CardScenario>(Resources.LoadAll<CardScenario>("Scenarios"));
     }
 
-    public void SpawnNewCard(bool forceSpawn = false) // Add an optional parameter to force spawn a new card
+    public void SpawnNewCard(bool forceSpawn = false)
     {
         if (cardScenarios.Count == 0)
         {
@@ -54,10 +54,6 @@ public class DeckManager : MonoBehaviour
         CardScenario randomScenario = cardScenarios[Random.Range(0, cardScenarios.Count)];
         Debug.Log("Selected Scenario: " + randomScenario.name);
 
-        // Assign random shade of dark brown
-        float randomValue = Random.Range(0.2f, 0.4f); // Dark brown shades
-        Color randomDarkBrown = new Color(randomValue * 0.5f, randomValue * 0.25f, randomValue * 0.1f);
-        newCard.GetComponent<SpriteRenderer>().color = randomDarkBrown;
 
         if (cardScript != null)
         {

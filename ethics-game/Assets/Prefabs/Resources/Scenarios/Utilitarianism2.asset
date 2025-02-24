@@ -18,3 +18,4 @@ MonoBehaviour:
   rightScoreChanges: 0500000000000000f6ffffff0a000000
   leftDecisionName: Go through with the plan.
   rightDecisionName: Cancel the plan.
+  cardType: Utilitarianism

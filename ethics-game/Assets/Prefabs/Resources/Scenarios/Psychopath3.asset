@@ -18,3 +18,4 @@ MonoBehaviour:
   rightScoreChanges: 0a0000000500000000000000f6ffffff
   leftDecisionName: Steal from him.
   rightDecisionName: Give him money.
+  cardType: Psychopath

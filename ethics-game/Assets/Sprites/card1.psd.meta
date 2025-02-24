@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ca90d83b3388d444990d8f97f76a8435
+guid: b98df636ffd363c4d903258e7a249b6b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4724887016493695189
-    second: gameBG_0
+      213: 813796157681362143
+    second: card1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gameBG_0
+      name: card1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 800
+        height: 1100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d046fd35bb229140800000000000000
-      internalID: 4724887016493695189
+      spriteID: fd4ec223b4f2b4b00800000000000000
+      internalID: 813796157681362143
       vertices: []
       indices: 
       edges: []

@@ -18,3 +18,4 @@ MonoBehaviour:
   rightScoreChanges: 00000000f6ffffff0000000005000000
   leftDecisionName: Stand up to them.
   rightDecisionName: Ignore them.
+  cardType: Virtue

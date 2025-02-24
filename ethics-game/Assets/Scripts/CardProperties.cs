@@ -3,45 +3,103 @@ using TMPro;
 
 public class CardProperties : MonoBehaviour
 {
-    // Remove single cardValue and add arrays for left and right swipe changes
     public int[] leftScoreChanges;
     public int[] rightScoreChanges;
-    public string leftDecisionName; // Add this line
-    public string rightDecisionName; // Add this line
+    public string leftDecisionName;
+    public string rightDecisionName;
 
     private TextMeshProUGUI textBox;
     public string cardText;
 
+    private SpriteRenderer spriteRenderer;
+
+    public Sprite virtueSprite;
+    public Sprite justiceSprite;
+    public Sprite psychopathSprite;
+    public Sprite utilitarianismSprite;
+
     void Start()
     {
         textBox = GetComponentInChildren<TextMeshProUGUI>();
-        // Optionally display the score arrays on the card
-        /*cardText = "Left: [" + string.Join(", ", leftScoreChanges) + "] Right: [" + string.join(", ", rightScoreChanges) + "]";*/
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("CardProperties: SpriteRenderer is NULL on GameObject: " + gameObject.name);
+        }
+        else
+        {
+            Debug.Log("CardProperties: SpriteRenderer found on " + gameObject.name);
+        }
+
         SetText(cardText);
     }
 
-    /*public void SetRandomValue()
-    {
-        // Create arrays for 4 score values each
-        leftScoreChanges = new int[4];
-        rightScoreChanges = new int[4];
-        for (int i = 0; i < 4; i++)
-        {
-            // For left swipes, random negative values (or zero)
-            leftScoreChanges[i] = Random.Range(-10, 1);
-            // For right swipes, random positive values (or zero)
-            rightScoreChanges[i] = Random.Range(0, 11);
-        }
-    }*/
 
     public void SetCardScenario(CardScenario scenario)
     {
+        if (scenario == null)
+        {
+            Debug.LogError("SetCardScenario: Scenario is NULL!");
+            return;
+        }
+
+        Debug.Log("SetCardScenario called for: " + scenario.name);
+
         cardText = scenario.scenarioText;
         leftScoreChanges = scenario.leftScoreChanges;
         rightScoreChanges = scenario.rightScoreChanges;
-        leftDecisionName = scenario.leftDecisionName; // Add this line
-        rightDecisionName = scenario.rightDecisionName; // Add this line
+        leftDecisionName = scenario.leftDecisionName;
+        rightDecisionName = scenario.rightDecisionName;
         SetText(cardText);
+
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer == null)
+            {
+                Debug.LogError("SetCardScenario: spriteRenderer is STILL NULL after reassigning!");
+                return;
+            }
+        }
+
+        Debug.Log("Setting sprite for card type: " + scenario.cardType);
+        SetCardSprite(scenario.cardType);
+    }
+
+
+    private void SetCardSprite(string cardType)
+    {
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("SetCardSprite: SpriteRenderer is null!");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(cardType))
+        {
+            Debug.LogWarning("SetCardSprite: Card type is null or empty.");
+            return;
+        }
+
+        switch (cardType)
+        {
+            case "Virtue":
+                spriteRenderer.sprite = virtueSprite;
+                break;
+            case "Justice":
+                spriteRenderer.sprite = justiceSprite;
+                break;
+            case "Psychopath":
+                spriteRenderer.sprite = psychopathSprite;
+                break;
+            case "Utilitarianism":
+                spriteRenderer.sprite = utilitarianismSprite;
+                break;
+            default:
+                Debug.LogWarning($"SetCardSprite: No matching sprite found for card type {cardType}.");
+                break;
+        }
     }
 
     public void SetText(string newText)

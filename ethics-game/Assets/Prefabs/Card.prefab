@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.756, z: 0}
-  m_LocalScale: {x: 4.0769477, y: 5.588128, z: 0.61455345}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5816317694100442317}
@@ -81,12 +81,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: e3e472bbd123f66418161b61134691dc, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 813796157681362143, guid: b98df636ffd363c4d903258e7a249b6b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 8, y: 11}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -130,13 +130,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 8, y: 11}
+    newSize: {x: 8, y: 11}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 8, y: 11}
   m_EdgeRadius: 0
 --- !u!50 &511632703148630747
 Rigidbody2D:
@@ -182,6 +182,10 @@ MonoBehaviour:
   leftDecisionName: 
   rightDecisionName: 
   cardText: 
+  virtueSprite: {fileID: 5599998428103198478, guid: 28d8a92445f2c9d4aadb9f4d3d274952, type: 3}
+  justiceSprite: {fileID: 2649994794035330428, guid: 70b79c16716dba645ad41ea7d434da89, type: 3}
+  psychopathSprite: {fileID: 5841408048756693702, guid: 2c6f2cdbbd802ba4caf28cfdeb9bfdeb, type: 3}
+  utilitarianismSprite: {fileID: 813796157681362143, guid: b98df636ffd363c4d903258e7a249b6b, type: 3}
 --- !u!114 &2105433034507939716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,9 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0836bb3bffabc924896cb62fabbff10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 2
+  threshold: 1
   moveSpeed: 10
   fadeSpeed: 10
+  shutUp: 0
 --- !u!1001 &6586282972941757642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,24 +299,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3649013395438172804, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
+      propertyPath: m_fontSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649013395438172804, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_margin.y
       value: 0.0081038475
       objectReference: {fileID: 0}
     - target: {fileID: 3649013395438172804, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_fontColor.b
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3649013395438172804, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_fontColor.g
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3649013395438172804, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649013395438172804, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649013395438172804, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
+      propertyPath: m_fontSizeMin
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3649013395438172804, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4294967295
+      value: 4278190080
       objectReference: {fileID: 0}
     - target: {fileID: 4677990603624456339, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_Name
@@ -319,23 +336,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5613179806169399326, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1.1982
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5613179806169399326, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 2.1396
-      objectReference: {fileID: 0}
-    - target: {fileID: 5613179806169399326, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5613179806169399326, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.56002027
-      objectReference: {fileID: 0}
-    - target: {fileID: 5613179806169399326, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.6634
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5613179806169399326, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -343,7 +348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5613179806169399326, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00000051327
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5613179806169399326, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_ConstrainProportionsScale

@@ -17,3 +17,4 @@ MonoBehaviour:
   rightScoreChanges: fbffffff0a00000005000000f6ffffff
   leftDecisionName: Evict them.
   rightDecisionName: Let them stay.
+  cardType: Justice

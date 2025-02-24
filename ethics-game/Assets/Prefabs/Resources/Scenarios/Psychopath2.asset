@@ -17,3 +17,4 @@ MonoBehaviour:
   rightScoreChanges: 140000000500000005000000ecffffff
   leftDecisionName: Take the money.
   rightDecisionName: Turn him in.
+  cardType: Psychopath

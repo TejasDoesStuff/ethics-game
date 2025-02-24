@@ -18,3 +18,4 @@ MonoBehaviour:
   rightScoreChanges: 00000000fbfffffff6ffffff0a000000
   leftDecisionName: Donate to the charity.
   rightDecisionName: Keep your money.
+  cardType: Virtue

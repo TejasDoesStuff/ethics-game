@@ -19,3 +19,4 @@ MonoBehaviour:
   rightScoreChanges: 0a00000000000000f6ffffff0a000000
   leftDecisionName: Forgive him.
   rightDecisionName: Fire him.
+  cardType: Virtue

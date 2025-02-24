@@ -18,3 +18,4 @@ MonoBehaviour:
   rightScoreChanges: 000000000a000000f6fffffffbffffff
   leftDecisionName: Build the factory.
   rightDecisionName: Stop construction efforts.
+  cardType: Utilitarianism

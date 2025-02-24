@@ -114,23 +114,23 @@ public class SwipeCard : MonoBehaviour
             float swipeDistance = transform.position.x - startPos.x;
             if (swipeDistance > 0.5f)
             {   
-                Debug.Log("attempting to show swipe values right");
+                /*Debug.Log("attempting to show swipe values right");*/
                 ShowSwipeValues("right");
             }
             else if (swipeDistance < -0.5f)
             {
-                Debug.Log("attempting to show swipe values left");
+                /*Debug.Log("attempting to show swipe values left");*/
                 ShowSwipeValues("left");
             }
             else
             {
-                Debug.Log("resetting swipe texts");
+                /*Debug.Log("resetting swipe texts");*/
                 ResetSwipeTexts();
             }
         }
         else
         {
-            Debug.Log("resetting swipe texts, not dragging");
+            /*Debug.Log("resetting swipe texts, not dragging");*/   
             ResetSwipeTexts(); // Ensure texts are reset when not dragging
         }
     }
@@ -154,7 +154,7 @@ public class SwipeCard : MonoBehaviour
         }
         else
         {
-            Debug.Log("Resetting card position, mouse up");
+            /*Debug.Log("Resetting card position, mouse up");*/
             transform.position = startPos;
             ResetSwipeTexts();
         }
@@ -186,7 +186,7 @@ public class SwipeCard : MonoBehaviour
         {
             int[] changes = direction == "right" ? cardScript.rightScoreChanges : cardScript.leftScoreChanges;
             updateScript.updateMultiple(changes);
-            DisplayChanges(changes); // Add this line to display changes
+            DisplayChanges(changes);
             Debug.Log($"Swiped {direction} with changes: {string.Join(", ", changes)}");
         }
 
@@ -203,7 +203,7 @@ public class SwipeCard : MonoBehaviour
 
     private void HideText(TextMeshProUGUI text)
     {
-        Debug.Log("Hiding " + text.name);
+        /*Debug.Log("Hiding " + text.name);*/
         Color color = text.color;
         color.a = 0;
         text.color = color;
@@ -263,7 +263,7 @@ public class SwipeCard : MonoBehaviour
 
     private void ResetSwipeTexts()
     {
-        Debug.Log("Resetting swipe texts");
+        /*Debug.Log("Resetting swipe texts");*/
         if (leftSwipeText != null)
         {
             HideText(leftSwipeText);

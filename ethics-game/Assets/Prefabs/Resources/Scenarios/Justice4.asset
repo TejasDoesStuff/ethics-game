@@ -18,3 +18,4 @@ MonoBehaviour:
   rightScoreChanges: f6ffffff050000000000000000000000
   leftDecisionName: Punish him.
   rightDecisionName: Let him go.
+  cardType: Justice

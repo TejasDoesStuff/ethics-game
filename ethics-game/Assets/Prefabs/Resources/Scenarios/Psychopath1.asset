@@ -18,3 +18,4 @@ MonoBehaviour:
   rightScoreChanges: 00000000ecffffff0000000014000000
   leftDecisionName: Win fairly.
   rightDecisionName: Rig the election.
+  cardType: Psychopath

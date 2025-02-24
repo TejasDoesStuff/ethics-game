@@ -18,3 +18,4 @@ MonoBehaviour:
   rightScoreChanges: fbfffffff6ffffff000000000a000000
   leftDecisionName: Allow landing.
   rightDecisionName: Deny landing.
+  cardType: Virtue

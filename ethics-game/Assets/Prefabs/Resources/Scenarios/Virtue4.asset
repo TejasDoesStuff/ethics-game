@@ -19,3 +19,4 @@ MonoBehaviour:
   rightScoreChanges: 00000000fbfffffff6ffffff0a000000
   leftDecisionName: Hire him.
   rightDecisionName: Ignore him.
+  cardType: Virtue

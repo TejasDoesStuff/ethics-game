@@ -18,3 +18,4 @@ MonoBehaviour:
   rightScoreChanges: 00000000fbfffffff6ffffff0a000000
   leftDecisionName: Remove him from power.
   rightDecisionName: Keep him in power.
+  cardType: Utilitarianism

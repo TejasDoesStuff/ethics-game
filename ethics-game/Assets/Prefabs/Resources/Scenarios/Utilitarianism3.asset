@@ -18,3 +18,4 @@ MonoBehaviour:
   rightScoreChanges: 0a0000000a0000000a0000000a000000
   leftDecisionName: Kill the chickens.
   rightDecisionName: Spare the chickens.
+  cardType: Utilitarianism

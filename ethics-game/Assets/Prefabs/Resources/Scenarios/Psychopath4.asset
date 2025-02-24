@@ -19,3 +19,4 @@ MonoBehaviour:
   rightScoreChanges: 050000000500000005000000f6ffffff
   leftDecisionName: Sabatoge the orphanage.
   rightDecisionName: Support the orphanage.
+  cardType: Psychopath
