@@ -199,7 +199,7 @@ public class UpdateScores : MonoBehaviour
         // Reset the role to "freebie". Assumes RoleSelector.Role.Freebie exists.
         if (roleSelector != null)
         {
-            roleSelector.selectedRole = RoleSelector.Role.Freebie;
+            roleSelector.SelectRole(RoleSelector.Role.Freebie);
         }
         
         if (deckManager != null)
@@ -208,6 +208,7 @@ public class UpdateScores : MonoBehaviour
         }
         shutUp = false;
         Debug.Log("Game has been reset.");
+        UpdateDayCounter(); // Update the day counter after resetting the game
     }
 
     private void ApplyRoleEffects() // Add this method to apply role-specific effects
@@ -272,6 +273,7 @@ public class UpdateScores : MonoBehaviour
             }
         }
         shutUp = false;
+        UpdateDayCounter(); // Update the day counter after selecting a role
     }
 
     private void UpdateDayCounter() // Modify this method to update the day counter with the role name
