@@ -32,13 +32,20 @@ public class DeckManager : MonoBehaviour
         cardScenarios = new List<CardScenario>(Resources.LoadAll<CardScenario>("Scenarios"));
     }
 
-    private void SpawnNewCard()
+    public void SpawnNewCard(bool forceSpawn = false) // Add an optional parameter to force spawn a new card
     {
         if (cardScenarios.Count == 0)
         {
             Debug.LogError("No card scenarios available to spawn.");
             return;
         }
+
+        if (!forceSpawn && GameObject.Find("gameover")?.activeSelf == true)
+        {
+            Debug.Log("Game over. No new cards will be spawned.");
+            return;
+        }
+
         GameObject newCard = Instantiate(cardPrefab, spawnPoint.position, Quaternion.identity);
         newCard.transform.SetParent(transform);
         CardProperties cardScript = newCard.GetComponent<CardProperties>();
@@ -47,9 +54,10 @@ public class DeckManager : MonoBehaviour
         CardScenario randomScenario = cardScenarios[Random.Range(0, cardScenarios.Count)];
         Debug.Log("Selected Scenario: " + randomScenario.name);
 
-        // Assign random color
-        Color randomColor = new Color(Random.value, Random.value, Random.value);
-        newCard.GetComponent<SpriteRenderer>().color = randomColor;
+        // Assign random shade of dark brown
+        float randomValue = Random.Range(0.2f, 0.4f); // Dark brown shades
+        Color randomDarkBrown = new Color(randomValue * 0.5f, randomValue * 0.25f, randomValue * 0.1f);
+        newCard.GetComponent<SpriteRenderer>().color = randomDarkBrown;
 
         if (cardScript != null)
         {

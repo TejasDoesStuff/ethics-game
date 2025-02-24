@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Card
   - UI
+  - gameover
   layers:
   - Default
   - TransparentFX

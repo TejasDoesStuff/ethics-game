@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class SwipeCard : MonoBehaviour
 {
@@ -11,7 +12,11 @@ public class SwipeCard : MonoBehaviour
     public float moveSpeed = 10f;
 
     [Header("Fade Out")]
-    public float fadeSpeed = 1f;
+    public float fadeSpeed = 0.5f;
+
+    [Header("Swipe Texts")]
+    private TextMeshProUGUI leftSwipeText;
+    private TextMeshProUGUI rightSwipeText;
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -31,6 +36,19 @@ public class SwipeCard : MonoBehaviour
         cardScript = GetComponent<CardProperties>();
         updateScript = canvas.GetComponent<UpdateScores>();
 
+        leftSwipeText = GameObject.Find("left").GetComponent<TextMeshProUGUI>();
+        rightSwipeText = GameObject.Find("right").GetComponent<TextMeshProUGUI>();
+
+        if (leftSwipeText == null)
+        {
+            Debug.LogError("Left swipe text object not found.");
+        }
+
+        if (rightSwipeText == null)
+        {
+            Debug.LogError("Right swipe text object not found.");
+        }
+
         if (cardScript == null)
         {
             Debug.LogError("CardProperties component not found on the card.");
@@ -39,6 +57,18 @@ public class SwipeCard : MonoBehaviour
         if (updateScript == null)
         {
             Debug.LogError("UpdateScores component not found on the canvas.");
+        }
+
+        if (leftSwipeText != null)
+        {
+            leftSwipeText.color = new Color(leftSwipeText.color.r, leftSwipeText.color.g, leftSwipeText.color.b, 0);
+            StartCoroutine(FadeTextOut(leftSwipeText));
+        }
+
+        if (rightSwipeText != null)
+        {
+            rightSwipeText.color = new Color(rightSwipeText.color.r, rightSwipeText.color.g, rightSwipeText.color.b, 0);
+            StartCoroutine(FadeTextOut(rightSwipeText));
         }
     }
 
@@ -51,7 +81,7 @@ public class SwipeCard : MonoBehaviour
 
             float swipeDistance = transform.position.x - startPos.x;
             if (swipeDistance > 0.5f)
-            {
+            {   
                 ShowSwipeValues("right");
             }
             else if (swipeDistance < -0.5f)
@@ -60,7 +90,7 @@ public class SwipeCard : MonoBehaviour
             }
             else
             {
-                ResetCardText();
+                ResetSwipeTexts();
             }
         }
     }
@@ -85,7 +115,7 @@ public class SwipeCard : MonoBehaviour
         else
         {
             transform.position = startPos;
-            ResetCardText();
+            ResetSwipeTexts();
         }
     }
 
@@ -122,6 +152,28 @@ public class SwipeCard : MonoBehaviour
         OnSwipe?.Invoke(direction);
     }
 
+    private IEnumerator FadeTextIn(TextMeshProUGUI text)
+    {
+        Color color = text.color;
+        while (color.a < 1)
+        {
+            color.a += Time.deltaTime * fadeSpeed;
+            text.color = color;
+            yield return null;
+        }
+    }
+
+    private IEnumerator FadeTextOut(TextMeshProUGUI text)
+    {
+        Color color = text.color;
+        while (color.a > 0)
+        {
+            color.a -= Time.deltaTime * fadeSpeed;
+            text.color = color;
+            yield return null;
+        }
+    }
+
     private void ShowSwipeValues(string direction)
     {
         if (cardScript != null && !updateScript.ShouldHideValues())
@@ -132,19 +184,40 @@ public class SwipeCard : MonoBehaviour
 
             // Provide placeholders if any variable is null
             values = values ?? new int[4];
-            decisionName = direction == "right" ? (decisionName ?? "disagree") : (decisionName ?? "agree");
+            decisionName = direction == "right" ? (decisionName ?? "Disagree") : (decisionName ?? "Agree");
             cardText = cardText ?? "Card Text";
 
-            string newText = $"{cardText}\n{decisionName.ToUpper()} Changes: [{string.Join(", ", values)}]";
-            cardScript.SetText(newText);
-        }
-    }
+            string newText = $"{decisionName}";
 
-    private void ResetCardText()
-    {
-        if (cardScript != null)
+            if (direction == "right")
+            {
+                rightSwipeText.text = newText;
+                StartCoroutine(FadeTextIn(rightSwipeText));
+                StartCoroutine(FadeTextOut(leftSwipeText));
+            }
+            else
+            {
+                leftSwipeText.text = newText;
+                StartCoroutine(FadeTextIn(leftSwipeText));
+                StartCoroutine(FadeTextOut(rightSwipeText));
+            }
+        }
+        else
         {
-            cardScript.SetText(cardScript.cardText);
+            StartCoroutine(FadeTextOut(leftSwipeText));
+            StartCoroutine(FadeTextOut(rightSwipeText));
+        }
+    }   
+
+    private void ResetSwipeTexts()
+    {
+        if (leftSwipeText != null)
+        {
+            StartCoroutine(FadeTextOut(leftSwipeText));
+        }
+        if (rightSwipeText != null)
+        {
+            StartCoroutine(FadeTextOut(rightSwipeText));
         }
     }
 }

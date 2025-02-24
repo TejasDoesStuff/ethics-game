@@ -179,6 +179,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftScoreChanges: 
   rightScoreChanges: 
+  leftDecisionName: 
+  rightDecisionName: 
   cardText: 
 --- !u!114 &2105433034507939716
 MonoBehaviour:
@@ -194,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   threshold: 2
   moveSpeed: 10
-  fadeSpeed: 3
+  fadeSpeed: 10
 --- !u!1001 &6586282972941757642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -345,6 +347,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5613179806169399326, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395818745495228506, guid: 6ef01032c794a3b46bdc9dbcd0d8ab60, type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
