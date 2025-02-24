@@ -7,6 +7,9 @@ public class DeckManager : MonoBehaviour
     public Transform spawnPoint;
     public List<CardScenario> cardScenarios;
     public UpdateScores updateScript;
+    public AudioClip swipeSoundEffect; // New swipe sound effect
+    public AudioSource swipeAudioSource; // New audio source for swipe sound
+
     private void Start()
     {
         SwipeCard.OnSwipe += HandleCardSwipe;
@@ -23,6 +26,11 @@ public class DeckManager : MonoBehaviour
 
     private void HandleCardSwipe(string direction)
     {
+        // Play swipe sound if assigned
+        if (swipeAudioSource != null && swipeSoundEffect != null)
+        {
+            swipeAudioSource.PlayOneShot(swipeSoundEffect);
+        }
         Debug.Log($"Card swiped {direction}");
         SpawnNewCard();
     }
