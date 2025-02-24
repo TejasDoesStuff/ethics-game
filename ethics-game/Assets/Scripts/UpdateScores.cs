@@ -16,6 +16,10 @@ public class UpdateScores : MonoBehaviour
     public GameObject roleSelectScreen; // Add this line to hold the role select screen object
     public List<Button> roleButtons; // Add this line to hold the list of role buttons
     public TMP_Text dayCounterText; // Add this line to hold the TMP_Text object for the day counter
+    public AudioClip deathSoundEffect; // Add this line for the death sound effect
+    public AudioSource deathAudioSource; // Add this line for the death audio source
+    public AudioClip selectRoleSoundEffect; // New role selection sound effect
+    public AudioSource selectRoleAudioSource; // New audio source for role selection
 
     public int score1 = 50;
     public int score2 = 50;
@@ -131,6 +135,11 @@ public class UpdateScores : MonoBehaviour
     private void ActivateGameOverObject()
     {
         shutUp = true;
+        // Play death audio if assigned
+        if (deathAudioSource != null && deathSoundEffect != null)
+        {
+            deathAudioSource.PlayOneShot(deathSoundEffect);
+        }
         if (gameOverObject != null)
         {
             gameOverObject.SetActive(true);
@@ -245,6 +254,11 @@ public class UpdateScores : MonoBehaviour
         int index = roleButtons.IndexOf(clickedButton);
         if (index >= 0 && index < roleButtons.Count)
         {
+            // Play role selection sound if assigned
+            if (selectRoleAudioSource != null && selectRoleSoundEffect != null)
+            {
+                selectRoleAudioSource.PlayOneShot(selectRoleSoundEffect);
+            }
             roleSelector.SelectRole((RoleSelector.Role)index); // Set the selected role
             clickedButton.gameObject.SetActive(false); // Disable the selected button
             
