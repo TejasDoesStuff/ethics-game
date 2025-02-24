@@ -17,3 +17,5 @@ MonoBehaviour:
     you that he needed a break after working so hard. '
   leftScoreChanges: f6ffffff0a0000000500000000000000
   rightScoreChanges: 0a00000000000000f6ffffff0a000000
+  leftDecisionName: Forgive him.
+  rightDecisionName: Fire him.

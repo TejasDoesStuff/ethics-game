@@ -16,3 +16,5 @@ MonoBehaviour:
     punish him for his crimes or let him go? '
   leftScoreChanges: 000000000a000000fbffffffecffffff
   rightScoreChanges: 0a000000fbffffff000000000a000000
+  leftDecisionName: Let him go.
+  rightDecisionName: Turn him in.

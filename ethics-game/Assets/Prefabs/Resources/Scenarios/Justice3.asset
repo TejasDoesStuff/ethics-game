@@ -15,3 +15,5 @@ MonoBehaviour:
   scenarioText: "A homeless family can\u2019t pay their rent and plead to stay."
   leftScoreChanges: 0a000000fbfffffff6ffffff0a000000
   rightScoreChanges: fbffffff0a00000005000000f6ffffff
+  leftDecisionName: Evict them.
+  rightDecisionName: Let them stay.

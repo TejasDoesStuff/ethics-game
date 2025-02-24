@@ -15,3 +15,5 @@ MonoBehaviour:
   scenarioText: 'You witness a murder, and the killer offers you money to stay silent. '
   leftScoreChanges: ecfffffffbffffff0000000014000000
   rightScoreChanges: 140000000500000005000000ecffffff
+  leftDecisionName: Take the money.
+  rightDecisionName: Turn him in.

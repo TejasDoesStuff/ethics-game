@@ -16,3 +16,5 @@ MonoBehaviour:
     evidence. '
   leftScoreChanges: 000000001400000000000000ecffffff
   rightScoreChanges: 00000000ecffffff0000000014000000
+  leftDecisionName: Win fairly.
+  rightDecisionName: Rig the election.

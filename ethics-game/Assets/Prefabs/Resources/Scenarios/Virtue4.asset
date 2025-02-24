@@ -17,3 +17,5 @@ MonoBehaviour:
     a chance. '
   leftScoreChanges: 000000000500000014000000f6ffffff
   rightScoreChanges: 00000000fbfffffff6ffffff0a000000
+  leftDecisionName: Hire him.
+  rightDecisionName: Ignore him.

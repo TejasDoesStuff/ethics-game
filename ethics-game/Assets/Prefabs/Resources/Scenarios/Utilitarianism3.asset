@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62171d213c9b1464486bf25992886962, type: 3}
   m_Name: Utilitarianism3
   m_EditorClassIdentifier: 
-  scenarioText: 
+  scenarioText: 'A farmer named Tonald Dump has a chicken farm infected with bird
+    flu. '
   leftScoreChanges: 00000000fbfffffff6ffffff0a000000
   rightScoreChanges: 0a0000000a0000000a0000000a000000
+  leftDecisionName: Kill the chickens.
+  rightDecisionName: Spare the chickens.

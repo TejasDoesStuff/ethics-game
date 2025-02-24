@@ -16,3 +16,5 @@ MonoBehaviour:
     have to pay much higher fees. '
   leftScoreChanges: 000000000a0000000a000000f6ffffff
   rightScoreChanges: 00000000fbfffffff6ffffff0a000000
+  leftDecisionName: Remove him from power.
+  rightDecisionName: Keep him in power.

@@ -16,3 +16,5 @@ MonoBehaviour:
     his water bottle and tries to use his power to get away with it. '
   leftScoreChanges: 0a0000000000000000000000fbffffff
   rightScoreChanges: f6ffffff050000000000000000000000
+  leftDecisionName: Punish him.
+  rightDecisionName: Let him go.

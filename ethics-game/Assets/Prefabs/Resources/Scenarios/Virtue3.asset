@@ -16,3 +16,5 @@ MonoBehaviour:
     cause, but it will take out a part of your salary. '
   leftScoreChanges: 000000000a0000000a000000f6ffffff
   rightScoreChanges: 00000000fbfffffff6ffffff0a000000
+  leftDecisionName: Donate to the charity.
+  rightDecisionName: Keep your money.

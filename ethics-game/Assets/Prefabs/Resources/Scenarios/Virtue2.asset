@@ -16,3 +16,5 @@ MonoBehaviour:
     to stand up to them, but it could put you in danger. '
   leftScoreChanges: 0000000005000000000000000a000000
   rightScoreChanges: 00000000f6ffffff0000000005000000
+  leftDecisionName: Stand up to them.
+  rightDecisionName: Ignore them.

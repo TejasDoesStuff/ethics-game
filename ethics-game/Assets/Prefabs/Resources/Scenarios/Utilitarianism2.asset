@@ -16,3 +16,5 @@ MonoBehaviour:
     income. '
   leftScoreChanges: 050000000000000014000000ecffffff
   rightScoreChanges: 0500000000000000f6ffffff0a000000
+  leftDecisionName: Go through with the plan.
+  rightDecisionName: Cancel the plan.

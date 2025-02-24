@@ -16,3 +16,5 @@ MonoBehaviour:
     will increase jobs but pollute the local environment. '
   leftScoreChanges: 00000000f6ffffff050000000a000000
   rightScoreChanges: 000000000a000000f6fffffffbffffff
+  leftDecisionName: Build the factory.
+  rightDecisionName: Stop construction efforts.

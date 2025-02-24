@@ -16,3 +16,5 @@ MonoBehaviour:
     They are requesting to land on a nearby military airstrip. "
   leftScoreChanges: 050000000a00000000000000f6ffffff
   rightScoreChanges: fbfffffff6ffffff000000000a000000
+  leftDecisionName: Allow landing.
+  rightDecisionName: Deny landing.

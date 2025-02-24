@@ -16,3 +16,5 @@ MonoBehaviour:
     sorry, but the damage is done.
   leftScoreChanges: 0a00000000000000fbffffff0a000000
   rightScoreChanges: f6fffffff6ffffff0500000000000000
+  leftDecisionName: Punish him.
+  rightDecisionName: Let him go.
