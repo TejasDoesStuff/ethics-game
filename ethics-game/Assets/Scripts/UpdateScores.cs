@@ -60,7 +60,7 @@ public class UpdateScores : MonoBehaviour
         score3 = Mathf.Clamp(score3, 0, maxThreshold);
         score4 = Mathf.Clamp(score4, 0, maxThreshold);
 
-        days += Random.Range(0, 6); // Add this line to increment days by 0-5
+        days += Random.Range(0, 16); // Add this line to increment days by 0-5
 
         if (days >= 30) // Check if days exceed or equal 30
         {
@@ -108,20 +108,19 @@ public class UpdateScores : MonoBehaviour
     private void CheckGameOver()
     {
         int[] scores = { score1, score2, score3, score4 };
-        string[] scoreNames = { "Justice", "Morality", "Happiness", "Control" };
+        // Custom death reasons for: Justice, Morality, Happiness, and Control respectively.
+        string[] customDeathReasons = {
+            "Justice: Lawyers around the city have had enough of you being unfair to the citizens of Ethika, and stage a successful insurrection on your government. It’s important to keep things just in your society.",
+            "Morality: The people around you begin to notice you aren't really that good of a guy, often making decisions that seem plain wrong. The vice president has had enough of your nonsense, and poisons you in your sleep.",
+            "Happiness: Due to your people getting sick of your reign, they rebel against you; in a violent rage you are sold to the enemy nation as a slave.",
+            "Control: Due to a lack of control in the government, a terrorist organization takes over Ethika, leaving your head on a pole for everyone to see."
+        };
 
         for (int i = 0; i < scores.Length; i++)
         {
-            if (scores[i] == 100)
+            if (scores[i] == 100 || scores[i] == 0)
             {
-                string reason = $"{scoreNames[i]} reached 100!";
-                Debug.Log($"Game Over: {reason}");
-                DisplayDaysAndReason(reason);
-                ActivateGameOverObject();
-            }
-            else if (scores[i] == 0)
-            {
-                string reason = $"{scoreNames[i]} reached 0!";
+                string reason = customDeathReasons[i];
                 Debug.Log($"Game Over: {reason}");
                 DisplayDaysAndReason(reason);
                 ActivateGameOverObject();
@@ -173,7 +172,7 @@ public class UpdateScores : MonoBehaviour
     {
         if (daysText != null)
         {
-            daysText.text = $"Months: {months}\nDays: {days}\nReason: {reason}"; // Display months and days
+            daysText.text = $"Months: {months}\nDays: {days}\n{reason}"; // Display months and days
         }
         else
         {
@@ -181,7 +180,7 @@ public class UpdateScores : MonoBehaviour
         }
     }
 
-    private void ResetGame() // Modify this method to reset the game and respawn a card
+    private void ResetGame() // Modify ResetGame to show all roles again and reset role to "freebie"
     {
         score1 = 30;
         score2 = 30;
@@ -191,6 +190,18 @@ public class UpdateScores : MonoBehaviour
         months = 0; // Reset months to 0
         UpdateHealthBars();
         gameOverObject.SetActive(false);
+
+        // Re-enable all role buttons
+        foreach (var button in roleButtons)
+        {
+            button.gameObject.SetActive(true);
+        }
+        // Reset the role to "freebie". Assumes RoleSelector.Role.Freebie exists.
+        if (roleSelector != null)
+        {
+            roleSelector.selectedRole = RoleSelector.Role.Freebie;
+        }
+        
         if (deckManager != null)
         {
             deckManager.SpawnNewCard(true); // Use the forceSpawn parameter to respawn a card
@@ -228,12 +239,32 @@ public class UpdateScores : MonoBehaviour
         roleSelectScreen.SetActive(true);
     }
 
-    private void OnRoleButtonClicked(Button clickedButton) // Add this method to handle role button clicks
+    private void OnRoleButtonClicked(Button clickedButton) // Update role button click to disable selected button and check for all inactive
     {
         int index = roleButtons.IndexOf(clickedButton);
         if (index >= 0 && index < roleButtons.Count)
         {
             roleSelector.SelectRole((RoleSelector.Role)index); // Set the selected role
+            clickedButton.gameObject.SetActive(false); // Disable the selected button
+            
+            // Check if all role buttons are inactive; if so, re-enable all buttons
+            bool allInactive = true;
+            foreach (var button in roleButtons)
+            {
+                if (button.gameObject.activeSelf)
+                {
+                    allInactive = false;
+                    break;
+                }
+            }
+            if (allInactive)
+            {
+                foreach (var button in roleButtons)
+                {
+                    button.gameObject.SetActive(true);
+                }
+            }
+            
             roleSelectScreen.SetActive(false); // Hide role select screen
             if (deckManager != null)
             {
