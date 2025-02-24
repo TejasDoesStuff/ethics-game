@@ -17,6 +17,7 @@ public class SwipeCard : MonoBehaviour
     [Header("Swipe Texts")]
     private TextMeshProUGUI leftSwipeText;
     private TextMeshProUGUI rightSwipeText;
+    private TextMeshProUGUI[] changeTexts; // Change this line to private
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -27,7 +28,7 @@ public class SwipeCard : MonoBehaviour
     private GameObject canvas;
     private CardProperties cardScript;
     private UpdateScores updateScript;
-
+    public bool shutUp = false;
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -36,45 +37,76 @@ public class SwipeCard : MonoBehaviour
         cardScript = GetComponent<CardProperties>();
         updateScript = canvas.GetComponent<UpdateScores>();
 
-        leftSwipeText = GameObject.Find("left").GetComponent<TextMeshProUGUI>();
-        rightSwipeText = GameObject.Find("right").GetComponent<TextMeshProUGUI>();
+        leftSwipeText = GameObject.Find("left")?.GetComponent<TextMeshProUGUI>();
+        rightSwipeText = GameObject.Find("right")?.GetComponent<TextMeshProUGUI>();
 
         if (leftSwipeText == null)
         {
-            Debug.LogError("Left swipe text object not found.");
+            Debug.Log("Left swipe text object not found. Replacing with 'unimportant'.");
+            leftSwipeText = GameObject.Find("unimportant")?.GetComponent<TextMeshProUGUI>();
         }
 
         if (rightSwipeText == null)
         {
-            Debug.LogError("Right swipe text object not found.");
+            Debug.Log("Right swipe text object not found. Replacing with 'unimportant'.");
+            rightSwipeText = GameObject.Find("unimportant")?.GetComponent<TextMeshProUGUI>();
         }
 
         if (cardScript == null)
         {
-            Debug.LogError("CardProperties component not found on the card.");
+            Debug.Log("CardProperties component not found on the card.");
         }
 
         if (updateScript == null)
         {
-            Debug.LogError("UpdateScores component not found on the canvas.");
+            Debug.Log("UpdateScores component not found on the canvas.");
         }
 
         if (leftSwipeText != null)
         {
             leftSwipeText.color = new Color(leftSwipeText.color.r, leftSwipeText.color.g, leftSwipeText.color.b, 0);
-            StartCoroutine(FadeTextOut(leftSwipeText));
+            HideText(leftSwipeText);
         }
 
         if (rightSwipeText != null)
         {
             rightSwipeText.color = new Color(rightSwipeText.color.r, rightSwipeText.color.g, rightSwipeText.color.b, 0);
-            StartCoroutine(FadeTextOut(rightSwipeText));
+            HideText(rightSwipeText);
+        }
+
+        changeTexts = new TextMeshProUGUI[4]; // Initialize the array
+        changeTexts[0] = GameObject.Find("c1")?.GetComponent<TextMeshProUGUI>();
+        changeTexts[1] = GameObject.Find("c2")?.GetComponent<TextMeshProUGUI>();
+        changeTexts[2] = GameObject.Find("c3")?.GetComponent<TextMeshProUGUI>();
+        changeTexts[3] = GameObject.Find("c4")?.GetComponent<TextMeshProUGUI>();
+
+        for (int i = 0; i < changeTexts.Length; i++)
+        {
+            if (changeTexts[i] == null)
+            {
+                Debug.Log($"Change text object c{i + 1} not found. Replacing with 'unimportant'.");
+                changeTexts[i] = GameObject.Find("unimportant")?.GetComponent<TextMeshProUGUI>();
+            }
+        }
+
+        if (changeTexts != null && changeTexts.Length == 4)
+        {
+            foreach (var text in changeTexts)
+            {
+                if (text != null)
+                {
+                    text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+                }
+            }
         }
     }
 
     void Update()
     {
-        if (isDragging)
+        if (shutUp) {
+            return;
+        }
+        else if (isDragging)
         {
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(mousePos.x, startPos.y, transform.position.z);
@@ -82,16 +114,24 @@ public class SwipeCard : MonoBehaviour
             float swipeDistance = transform.position.x - startPos.x;
             if (swipeDistance > 0.5f)
             {   
+                Debug.Log("attempting to show swipe values right");
                 ShowSwipeValues("right");
             }
             else if (swipeDistance < -0.5f)
             {
+                Debug.Log("attempting to show swipe values left");
                 ShowSwipeValues("left");
             }
             else
             {
+                Debug.Log("resetting swipe texts");
                 ResetSwipeTexts();
             }
+        }
+        else
+        {
+            Debug.Log("resetting swipe texts, not dragging");
+            ResetSwipeTexts(); // Ensure texts are reset when not dragging
         }
     }
 
@@ -114,6 +154,7 @@ public class SwipeCard : MonoBehaviour
         }
         else
         {
+            Debug.Log("Resetting card position, mouse up");
             transform.position = startPos;
             ResetSwipeTexts();
         }
@@ -145,6 +186,7 @@ public class SwipeCard : MonoBehaviour
         {
             int[] changes = direction == "right" ? cardScript.rightScoreChanges : cardScript.leftScoreChanges;
             updateScript.updateMultiple(changes);
+            DisplayChanges(changes); // Add this line to display changes
             Debug.Log($"Swiped {direction} with changes: {string.Join(", ", changes)}");
         }
 
@@ -152,31 +194,24 @@ public class SwipeCard : MonoBehaviour
         OnSwipe?.Invoke(direction);
     }
 
-    private IEnumerator FadeTextIn(TextMeshProUGUI text)
+    private void ShowText(TextMeshProUGUI text)
     {
         Color color = text.color;
-        while (color.a < 1)
-        {
-            color.a += Time.deltaTime * fadeSpeed;
-            text.color = color;
-            yield return null;
-        }
+        color.a = 1;
+        text.color = color;
     }
 
-    private IEnumerator FadeTextOut(TextMeshProUGUI text)
+    private void HideText(TextMeshProUGUI text)
     {
+        Debug.Log("Hiding " + text.name);
         Color color = text.color;
-        while (color.a > 0)
-        {
-            color.a -= Time.deltaTime * fadeSpeed;
-            text.color = color;
-            yield return null;
-        }
+        color.a = 0;
+        text.color = color;
     }
 
     private void ShowSwipeValues(string direction)
     {
-        if (cardScript != null && !updateScript.ShouldHideValues())
+        if (cardScript != null)
         {
             int[] values = direction == "right" ? cardScript.rightScoreChanges : cardScript.leftScoreChanges;
             string decisionName = direction == "right" ? cardScript.rightDecisionName : cardScript.leftDecisionName;
@@ -192,32 +227,65 @@ public class SwipeCard : MonoBehaviour
             if (direction == "right")
             {
                 rightSwipeText.text = newText;
-                StartCoroutine(FadeTextIn(rightSwipeText));
-                StartCoroutine(FadeTextOut(leftSwipeText));
+                ShowText(rightSwipeText);
+                HideText(leftSwipeText);
             }
             else
             {
                 leftSwipeText.text = newText;
-                StartCoroutine(FadeTextIn(leftSwipeText));
-                StartCoroutine(FadeTextOut(rightSwipeText));
+                ShowText(leftSwipeText);
+                HideText(rightSwipeText);
             }
+
+            DisplayChanges(values); // Add this line to display changes
         }
         else
         {
-            StartCoroutine(FadeTextOut(leftSwipeText));
-            StartCoroutine(FadeTextOut(rightSwipeText));
+            HideText(leftSwipeText);
+            HideText(rightSwipeText);
         }
-    }   
+    }
+
+    private void DisplayChanges(int[] changes) // Add this method to display changes
+    {
+        if (changeTexts != null && changeTexts.Length == 4)
+        {
+            for (int i = 0; i < changes.Length; i++)
+            {
+                if (changeTexts[i] != null)
+                {
+                    changeTexts[i].text = changes[i] > 0 ? $"+{changes[i]}" : $"{changes[i]}";
+                    ShowText(changeTexts[i]);
+                }
+            }
+        }
+    }
 
     private void ResetSwipeTexts()
     {
+        Debug.Log("Resetting swipe texts");
         if (leftSwipeText != null)
         {
-            StartCoroutine(FadeTextOut(leftSwipeText));
+            HideText(leftSwipeText);
         }
         if (rightSwipeText != null)
         {
-            StartCoroutine(FadeTextOut(rightSwipeText));
+            HideText(rightSwipeText);
         }
+        if (changeTexts != null && changeTexts.Length == 4)
+        {
+            foreach (var text in changeTexts)
+            {
+                if (text != null)
+                {
+                    HideText(text);
+                }
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        shutUp = true;
     }
 }

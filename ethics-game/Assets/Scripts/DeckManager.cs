@@ -6,7 +6,7 @@ public class DeckManager : MonoBehaviour
     public GameObject cardPrefab;
     public Transform spawnPoint;
     public List<CardScenario> cardScenarios;
-
+    public UpdateScores updateScript;
     private void Start()
     {
         SwipeCard.OnSwipe += HandleCardSwipe;
@@ -40,7 +40,7 @@ public class DeckManager : MonoBehaviour
             return;
         }
 
-        if (!forceSpawn && GameObject.Find("gameover")?.activeSelf == true)
+        if (!forceSpawn && updateScript.shutUp)
         {
             Debug.Log("Game over. No new cards will be spawned.");
             return;
